@@ -4,14 +4,16 @@ import java.util.Scanner;
 public class Main {
     static Scanner k = new Scanner(System.in);
     static Random r = new Random();
+    //setting secret default boolean to false so that the secret room is kept available after finding it//
     public static boolean secret = false;
+    //static to keep track of the number of rooms you enter//
     public static int count = 0;
     public static void main(String[] args) {
         System.out.println("This is a directional adventure game. The goal is to find the secret room. " +
                 "From your starting room in the foyer you can move in any direction using" + "N,S, E, or W." + "Any other key will cause an error, good luck!");
 
         System.out.println("Welcome to Zork! Type QUIT at any time to quit the game.");
-
+//boolean repeat = true is only to repeat the while loop, if it is false then it will exit the program//
         boolean repeat = true;
 
         int next = 1;
@@ -90,14 +92,15 @@ public class Main {
             System.out.println("You are being followed by a ghost. His name is Casper.");
         }
     }
-
+//entering the house with each room as its own method//
     public static int foyer() {
         System.out.println("You are in the foyer. There is a dead scorpion.");
         System.out.println("Which direction do you want to go?");
         String direction = k.next();
         if (direction.equalsIgnoreCase("n")) {
             return 2;
-        } else if (direction.equalsIgnoreCase("quit") || direction.equalsIgnoreCase("s")) {
+        //way to exit the house//
+            } else if (direction.equalsIgnoreCase("quit") || direction.equalsIgnoreCase("s")) {
             return -2;
         } else {
             return -1;
@@ -106,7 +109,6 @@ public class Main {
 
     public static int frontroom() {
         System.out.println("You are in the front room. There is a piano.");
-
         System.out.println("Which direction do you want to go?");
         String direction = k.next();
         if (direction.equalsIgnoreCase("s")) {
