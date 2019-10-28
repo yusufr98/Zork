@@ -12,6 +12,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
     <option name="GROUP_DATA_SOURCES" value="true" />
@@ -26,10 +27,13 @@
     <expand />
     <select />
   </component>
+=======
+>>>>>>> 38a81337e6d23fdf6e8d38364d111b1e4954feea
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1SpmndBt5pt562LhQCHFjLCMjfR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -69,8 +73,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572269079360</updated>
+<<<<<<< HEAD
       <workItem from="1572269087435" duration="815000" />
       <workItem from="1572270224907" duration="968000" />
+=======
+      <workItem from="1572269087435" duration="1709000" />
+>>>>>>> 38a81337e6d23fdf6e8d38364d111b1e4954feea
     </task>
     <servers />
   </component>
