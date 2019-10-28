@@ -1,4 +1,4 @@
-package com.company;
+/*package com.company;
 import java.util.Random;
 import java.util.Scanner;
 public class Main3 {
@@ -87,23 +87,19 @@ public class Main3 {
         } else if (direction.equalsIgnoreCase("quit")) {
             return -2;
         } else {
-            System.out.println("Choose another direction");
-            repeat = true;
+            return -1;
         }
-        return -1;
     }
 
-    public static int vault(String direction) {
+    public static int vault() {
         Scanner k = new Scanner(System.in);
         Scanner num = new Scanner(System.in);
         System.out.println("You are in the vault. There are three walking skeletons.");
         System.out.println("Which direction do you want to go?");
-        direction = k.next();
-        int sr = num.nextInt();
-        sr = 1;
+        String direction = k.next();
+        int sr = r.nextInt();
         if (direction.equalsIgnoreCase("e")) {
-            return 7;
-            if (direction.equalsIgnoreCase("e")) {
+            if
                 return 8;
                 if (sr == 1); {
                 System.out.println("You are in the Secret Room. There are piles of gold.");}
@@ -119,7 +115,6 @@ public class Main3 {
                 System.out.println("Choose another direction");
                 repeat = true;
             }
-        }
     } return -1;
 
     public static int secretroom(String direction) {
@@ -140,3 +135,4 @@ public class Main3 {
     }
     return = -1;
 }
+*/
