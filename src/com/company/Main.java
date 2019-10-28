@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.Scanner;
 public class Main {
     static Scanner k = new Scanner(System.in);
+    static Random r = new Random();
 
     public static void main(String[] args) {
         System.out.println("This is a directional adventure game. The goal is to find the secret room. " +
@@ -74,6 +75,11 @@ public class Main {
                 repeat = false;
             }
         }
+        System.out.println("You have left the house.");
+        int ghost = 1 + r.nextInt(4);
+        if(ghost == 1){
+            System.out.println("You are being followed by a ghost. His name is Casper.");
+        }
     }
 
     public static int foyer() {
@@ -82,7 +88,7 @@ public class Main {
         String direction = k.next();
         if (direction.equalsIgnoreCase("n")) {
             return 2;
-        } else if (direction.equalsIgnoreCase("quit")) {
+        } else if (direction.equalsIgnoreCase("quit") || direction.equalsIgnoreCase("s")) {
             return -2;
         } else {
             return -1;
