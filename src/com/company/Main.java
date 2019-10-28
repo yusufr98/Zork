@@ -5,6 +5,10 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner k = new Scanner(System.in);
+
+        System.out.println("This is a directional adventure game. The goal is to find the secret room. " +
+                "From your starting room in the foyer you can move in any direction using" + "N,S, E, or W." + "Any other key will cause an error, good luck!");
+
         System.out.println("Welcome to Zork! Type QUIT at any time to quit the game.");
 
     }
@@ -12,10 +16,8 @@ public class Main {
         Scanner k = new Scanner(System.in);
         System.out.println("You are in the foyer. You can choose which direction to move in next: ");
         String d = k.next();
-        if(d.equalsIgnoreCase("north")){
+        if (d.equalsIgnoreCase("north")) {
 
-        else{
-            return -1;
         }
     }
 }
