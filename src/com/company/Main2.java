@@ -42,8 +42,7 @@ public class Main2 {
     public static int frontroom() {
         Scanner k = new Scanner(System.in);
         System.out.println("You are in the front room. There is a piano.");
-        boolean repeat = false;
-        do {
+
             System.out.println("Which direction do you want to go?");
             String direction = k.next();
             if (direction.equalsIgnoreCase("s")) {
@@ -55,25 +54,73 @@ public class Main2 {
             } else if (direction.equalsIgnoreCase("quit")) {
                 return -2;
             } else {
-                return -1;
+               return -  1;
             }
         }
-    }
-    public static int foyer(String direction) {
+
+    public static int library() {
         Scanner k = new Scanner(System.in);
-        System.out.println("You are in the foyer. There is a dead scorpion.");
-        boolean repeat = false;
-        do {
+        System.out.println("You are in the library. There are spiders in this room.");
             System.out.println("Which direction do you want to go?");
-            direction = k.next();
+            String direction = k.next();
             if (direction.equalsIgnoreCase("n")) {
+                return 5;
+            }
+            else if (direction.equalsIgnoreCase("e")){
                 return 2;
-            } else if (direction.equalsIgnoreCase("quit")) {
+            }
+            else if (direction.equalsIgnoreCase("quit")) {
                 return -2;
             } else {
-                System.out.println("Choose another diretion");
-                repeat = true;
+                return -1;
             }
-        }while (repeat);
+    }
+    public static int kitchen(){
+        Scanner k = new Scanner(System.in);
+        System.out.println("You are in the kitchen. There are bats in this room.");
+        System.out.println("Which direction do you want to go?");
+        String direction = k.next();
+        if (direction.equalsIgnoreCase("w")) {
+            return 2;
+        }
+        else if (direction.equalsIgnoreCase("n")){
+            return 7;
+        }
+        else if (direction.equalsIgnoreCase("quit")) {
+            return -2;
+        } else {
+            return -1;
+        }
+    }
+    public static int parlor() {
+        Scanner k = new Scanner(System.in);
+        System.out.println("You are in the parlor. There a treasure chest in this room.");
+        System.out.println("Which direction do you want to go?");
+        String direction = k.next();
+        if (direction.equalsIgnoreCase("w")) {
+            return 6;
+        }
+        else if (direction.equalsIgnoreCase("s")){
+            return 4;
+        }
+        else if (direction.equalsIgnoreCase("quit")) {
+            return -2;
+        } else {
+            return -1;
+        }
+    }
+    public static int secretRoom() {
+        Scanner k = new Scanner(System.in);
+        System.out.println("You are in the Secret Room!!! There are piles of gold in this room!! Congrats!");
+        System.out.println("Which direction do you want to go?");
+        String direction = k.next();
+        if (direction.equalsIgnoreCase("w")) {
+            return 6;
+        }
+        else if (direction.equalsIgnoreCase("quit")) {
+            return -2;
+        } else {
+            return -1;
+        }
     }
 }
