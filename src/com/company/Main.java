@@ -16,28 +16,71 @@ public class Main {
         int next = 1;
         while(repeat){
             if(next == 1){
-                next = foyer();
+                int n = foyer();
+                while(n == -1){
+                    System.out.println("You have reached a dead-end. Choose another direction. ");
+                    n = foyer();
+                }
+                next = n;
             }
             else if(next == 2){
-                next = frontroom();
+                int n = frontroom();
+                while(n == -1){
+                    System.out.println("You have reached a dead-end. Choose another direction. ");
+                    n = frontroom();
+                }
+                next = n;
             }
             else if(next == 3){
-                next = library();
+                int n = library();
+                while(n == -1){
+                    System.out.println("You have reached a dead-end. Choose another direction. ");
+                    n = library();
+                }
+                next = n;
             }
             else if(next == 4){
-                next = kitchen();
+                int n = kitchen();
+                while(n == -1){
+                    System.out.println("You have reached a dead-end. Choose another direction. ");
+                    n = kitchen();
+                }
+                next = n;
             }
             else if(next == 5){
-                next = diningroom();
+                int n = diningroom();
+                while(n == -1){
+                    System.out.println("You have reached a dead-end. Choose another direction. ");
+                    n = diningroom();
+                }
+                next = n;
             }
             else if(next == 6){
-                next = vault();
+                int n = vault();
+                while(n == -1){
+                    System.out.println("You have reached a dead-end. Choose another direction. ");
+                    n = vault();
+                }
+                next = n;
             }
             else if(next == 7){
-                next = parlor();
+                int n = parlor();
+                while(n == -1){
+                    System.out.println("You have reached a dead-end. Choose another direction. ");
+                    n = parlor();
+                }
+                next = n;
             }
             else if(next == 8){
-                next = secretroom();
+                int n = secret();
+                while(n == -1){
+                    System.out.println("You have reached a dead-end. Choose another direction. ");
+                    n = secret();
+                }
+                next = n;
+            }
+            else if(next == -2){
+                repeat = false;
             }
         }
     }
@@ -85,5 +128,18 @@ public class Main {
         else{
             return -1;
         }
+    }
+    public static int foyer(String direction) {
+        Scanner k = new Scanner(System.in);
+        System.out.println("You are in the foyer. There is a dead scorpion.");
+            System.out.println("Which direction do you want to go?");
+            direction = k.next();
+            if (direction.equalsIgnoreCase("n")) {
+                return 2;
+            } else if (direction.equalsIgnoreCase("quit")) {
+                return -2;
+            } else {
+                return -1;
+            }
     }
 }
