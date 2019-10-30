@@ -1,4 +1,6 @@
 package com.company;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 public class Main {
@@ -9,222 +11,97 @@ public class Main {
     //static to keep track of the number of rooms you enter//
     public static int count = 0;
     public static void main(String[] args) {
+        ArrayList<Room> list = new ArrayList<>();
+        //Initilaize all the rooms and add them to an arryalist
+        list.add(new Room("foyer",1,2,-2,-1,-1));
+        list.add(new Room("front room",2,-1,1,4,3));
+        list.add(new Room("library",3,5,-1,2,-1));
+        list.add(new Room("kitchen",4,7,-1, -1,2));
+        list.add(new Room("dining room",5,-1,3,-1,-1));
+        list.add(new Room("vault",6,-1,-1,7,-1));
+        list.add(new Room("parlor",7,-1,4,-1,6));
+        list.add(new Room("secret room",8,-1,-1,-1,6));
+        //Randomly assign teddy to a room
+        int t = r.nextInt(8);
+        list.get(t).setTeddy(true);
         System.out.println("This is a directional adventure game. The goal is to find the secret room. " +
-                "From your starting room in the foyer you can move in any direction using" + "N,S, E, or W." + "Any other key will cause an error, good luck!");
-
+                "From your starting room in the foyer you can move in any direction using N,S, E, or W. Any other key will cause an error, good luck!");
         System.out.println("Welcome to Zork! Type QUIT at any time to quit the game.");
-//boolean repeat = true is only to repeat the while loop, if it is false then it will exit the program//
-        boolean repeat = true;
 
+        boolean repeat = true;
         int next = 1;
+        int userMoney = 0;
+        String d;
+
         while (repeat) {
-            if (next == 1) {
-                int n = foyer();
-                while (n == -1) {
-                    System.out.println("You have reached a dead-end. Choose another direction. ");
-                    n = foyer();
+            int x = -1;
+            Room current = list.get(next-1);
+            //set isVisit to true if the room has been entered
+            if(!current.isVisit()){
+                list.get(next-1).setVisit(true);
+            }
+            System.out.println("You are in the " + current.getName() + ". You have " + userMoney + " dollars.");
+            if(current.isTeddy()){
+                System.out.println("Teddy is here to steal all your money! He laughs maniacally as he takes all your hard earned cash.");
+                list.get(next-1).setTeddy(false);
+                userMoney = 0;
+            }
+            else if(current.getMoney() != 0){
+                System.out.println("You found " +  current.getMoney() + " dollars!");
+                System.out.println("Would you like to take the money(yes/no)?");
+                String s = k.next();
+                if(s.equalsIgnoreCase("yes")){
+                    userMoney+=current.getMoney();
+                    list.get(next-1).setMoney(0);
                 }
-                count++;
-                next = n;
-            } else if (next == 2) {
-                int n = frontroom();
-                while (n == -1) {
-                    System.out.println("You have reached a dead-end. Choose another direction. ");
-                    n = frontroom();
+            }
+            do {
+                System.out.println("Which direction would you like to go in?");
+                d = k.next();
+                if (d.equalsIgnoreCase("n")) {
+                    x = current.getNorth();
+                } else if (d.equalsIgnoreCase("s")) {
+                    x = current.getSouth();
+                } else if (d.equalsIgnoreCase("w")) {
+                    x = current.getWest();
+                } else if (d.equalsIgnoreCase("e")) {
+                    x = current.getEast();
+                } else if (d.equalsIgnoreCase("quit")) {
+                    repeat = false;
+                    x = -2;
+                } else {
+                    x = -1;
                 }
-                count++;
-                next = n;
-            } else if (next == 3) {
-                int n = library();
-                while (n == -1) {
-                    System.out.println("You have reached a dead-end. Choose another direction. ");
-                    n = library();
+                if(x == -1){
+                    System.out.println("You've reached a dead end. Choose another direction.");
                 }
-                count++;
-                next = n;
-            } else if (next == 4) {
-                int n = kitchen();
-                while (n == -1) {
-                    System.out.println("You have reached a dead-end. Choose another direction. ");
-                    n = kitchen();
+            } while (x == -1);
+            if(x == 7 && current.getIndex() == 6){
+                if(secret){
+                    System.out.println("Would you like to enter the parlor or the secret room(P/S)?");
+                    String c = k.next();
+                    if(c.equalsIgnoreCase("s")){
+                        x = 8;
+                    }
                 }
-                count++;
-                next = n;
-            } else if (next == 5) {
-                int n = diningroom();
-                while (n == -1) {
-                    System.out.println("You have reached a dead-end. Choose another direction. ");
-                    n = diningroom();
+                else{
+                    int chance = r.nextInt(4);
+                    if(chance == 0){
+                        x = 8;
+                    }
                 }
+            }
+            next = x;
+        }
+        for(Room r : list){
+            if(r.isVisit()){
                 count++;
-                next = n;
-            } else if (next == 6) {
-                int n = vault();
-                while (n == -1) {
-                    System.out.println("You have reached a dead-end. Choose another direction. ");
-                    n = vault();
-                }
-                count++;
-                next = n;
-            } else if (next == 7) {
-                int n = parlor();
-                while (n == -1) {
-                    System.out.println("You have reached a dead-end. Choose another direction. ");
-                    n = parlor();
-                }
-                count++;
-                next = n;
-            } else if (next == 8) {
-                int n = secretRoom();
-                while (n == -1) {
-                    System.out.println("You have reached a dead-end. Choose another direction. ");
-                    n = secretRoom();
-                }
-                count++;
-                next = n;
-            } else if (next == -2) {
-                repeat = false;
             }
         }
         System.out.println("You have left the house. You visited "+ count + " rooms.");
         int ghost = 1 + r.nextInt(4);
         if(ghost == 1){
             System.out.println("You are being followed by a ghost. His name is Casper.");
-        }
-    }
-//entering the house with each room as its own method//
-    public static int foyer() {
-        System.out.println("You are in the foyer. There is a dead scorpion.");
-        System.out.println("Which direction do you want to go?");
-        String direction = k.next();
-        if (direction.equalsIgnoreCase("n")) {
-            return 2;
-        //way to exit the house//
-            } else if (direction.equalsIgnoreCase("quit") || direction.equalsIgnoreCase("s")) {
-            return -2;
-        } else {
-            return -1;
-        }
-    }
-
-    public static int frontroom() {
-        System.out.println("You are in the front room. There is a piano.");
-        System.out.println("Which direction do you want to go?");
-        String direction = k.next();
-        if (direction.equalsIgnoreCase("s")) {
-            return 1;
-        } else if (direction.equalsIgnoreCase("w")) {
-            return 3;
-        } else if (direction.equalsIgnoreCase("e")) {
-            return 4;
-        } else if (direction.equalsIgnoreCase("quit")) {
-            return -2;
-        } else {
-            return -1;
-        }
-    }
-
-    public static int library() {
-        System.out.println("You are in the library. There are spiders in this room.");
-        System.out.println("Which direction do you want to go?");
-        String direction = k.next();
-        if (direction.equalsIgnoreCase("n")) {
-            return 5;
-        } else if (direction.equalsIgnoreCase("e")) {
-            return 2;
-        } else if (direction.equalsIgnoreCase("quit")) {
-            return -2;
-        } else {
-            return -1;
-        }
-    }
-
-    public static int kitchen() {
-        System.out.println("You are in the kitchen. There are bats in this room.");
-        System.out.println("Which direction do you want to go?");
-        String direction = k.next();
-        if (direction.equalsIgnoreCase("w")) {
-            return 2;
-        } else if (direction.equalsIgnoreCase("n")) {
-            return 7;
-        } else if (direction.equalsIgnoreCase("quit")) {
-            return -2;
-        } else {
-            return -1;
-        }
-    }
-
-    public static int parlor() {
-        System.out.println("You are in the parlor. There a treasure chest in this room.");
-        System.out.println("Which direction do you want to go?");
-        String direction = k.next();
-        if (direction.equalsIgnoreCase("w")) {
-            return 6;
-        } else if (direction.equalsIgnoreCase("s")) {
-            return 4;
-        } else if (direction.equalsIgnoreCase("quit")) {
-            return -2;
-        } else {
-            return -1;
-        }
-    }
-
-    public static int secretRoom() {
-        System.out.println("You are in the Secret Room!!! There are piles of gold in this room!! Congrats!");
-        System.out.println("Which direction do you want to go?");
-        String direction = k.next();
-        if (direction.equalsIgnoreCase("w")) {
-            return 6;
-        } else if (direction.equalsIgnoreCase("quit")) {
-            return -2;
-        } else {
-            return -1;
-        }
-    }
-    public static int vault() {
-        Scanner k = new Scanner(System.in);
-        Scanner num = new Scanner(System.in);
-        System.out.println("You are in the vault. There are three walking skeletons.");
-        System.out.println("Which direction do you want to go?");
-        String direction = k.next();
-        int sr = 1 + r.nextInt(4);
-        if (direction.equalsIgnoreCase("e")) {
-            if(secret){
-                System.out.println("Would you like to go to the parlor or the secret room(P/S)?");
-                String s = k.next();
-                if(s.equalsIgnoreCase("s")){
-                    return 8;
-                }
-                else{
-                    return 7;
-                }
-            }
-            else {
-                if (sr == 1) {
-                    secret = true;
-                    return 8;
-                } else {
-                    return 7;
-                }
-            }
-        }
-        else if (direction.equalsIgnoreCase("quit")) {
-            return -2;
-        } else {
-            return -1;
-        }
-    }
-
-    public static int diningroom() {
-        System.out.println("You are in the dining room. There is dust and an empty box.");
-        System.out.println("Which direction do you want to go?");
-        String direction = k.next();
-        if (direction.equalsIgnoreCase("s")) {
-            return 3;
-        } else if (direction.equalsIgnoreCase("quit")) {
-            return -2;
-        } else {
-            return -1;
         }
     }
 }
